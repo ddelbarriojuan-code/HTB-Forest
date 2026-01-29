@@ -25,11 +25,13 @@ svc-alfresco >> s3rvice
 ![g](imagenes/forest9.png)
 ![f](imagenes/forest10.png)
 ![o](imagenes/forest11.png)
+
 	1. Escalada a administrador, enumeré los permisos y los grupos en a los que pertenecía el usuario *svc-alfresco*, vi que pertenece al grupo *Acount Operator* por lo que tiene la capacidad de crear o modificar usuarios no protegidos,
 	
 Mediante consultas LDAP/PowerShell, se identificó la existencia del grupo **Exchange Windows Permissions**. Es un vector conocido que, en instalaciones de Exchange, este grupo posee derechos de **WriteDACL** sobre el objeto raíz del dominio.
 
 ![Permisos Exchange](imagenes/forest12.png)
+
 	 Por lo que pode  crear un usuario nuevo y añadirle al grupo *Exchange Windows Permissions* para heredar los derechos de [[WriteDACL]] (Poder de modificar los niveles de privilegios de los usuarios no protegidos),  de esa manera nos podremos otorgar privilegios de replicación de contraseñas (**DCSync**), también se le añadió al grupo *Remote Management Users* para que se pudiera conseguir la Shell a través de [[evilwinrm]]
 
 ```PowerShell 
