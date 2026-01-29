@@ -1,7 +1,7 @@
 #windows #ldap #easy 
 
 1.   Reconocimiento, hacemos un escaneo con nmap, que nos devuelve cantidad de puertos que no nos siren, asique filtraremos con grep buscando los puertos mas probables  para no perder el tiempo.
-![[forest1.png]]![[forest2.png]]
+![Nmap](imagenes/forest1.png) ![[forest2.png]]
 ![[forest3.png]]
 Con la herramienta [[enum4linux]] intenté, extraer el máximo número de datos, identifiqué el servicio **LDAPS** expuesto, permitiendo una enumeración de objetos del directorio mediante sesiones no autenticadas y el servicio **RDP (Remote Desktop Protocol)** activo, lo que representa el vector de acceso final para obtener una sesión interactiva una vez se comprometan credenciales válidas.
 ![[forest4.png]]
