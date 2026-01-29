@@ -26,7 +26,7 @@ svc-alfresco >> s3rvice
 ![f](imagenes/forest10.png)
 ![o](imagenes/forest11.png)
 
-	1. Escalada a administrador, enumeré los permisos y los grupos en a los que pertenecía el usuario *svc-alfresco*, vi que pertenece al grupo *Acount Operator* por lo que tiene la capacidad de crear o modificar usuarios no protegidos,
+3. Escalada a administrador, enumeré los permisos y los grupos en a los que pertenecía el usuario *svc-alfresco*, vi que pertenece al grupo *Acount 		Operator* por lo que tiene la capacidad de crear o modificar usuarios no protegidos,
 	
 Mediante consultas LDAP/PowerShell, se identificó la existencia del grupo **Exchange Windows Permissions**. Es un vector conocido que, en instalaciones de Exchange, este grupo posee derechos de **WriteDACL** sobre el objeto raíz del dominio.
 
