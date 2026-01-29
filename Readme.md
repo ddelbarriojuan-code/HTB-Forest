@@ -1,6 +1,6 @@
 #windows #ldap #easy 
 
-1.   Reconocimiento, hice un escaneo con nmap, que me devuelvió cantidad de puertos que no nos pueden servir, filtre con grep buscando los puertos mas comunes para no perder el tiempo.
+1. Reconocimiento, hice un escaneo con nmap, que me devuelvió cantidad de puertos que no nos pueden servir, filtré con grep buscando los puertos mas comunes para no perder el tiempo.
 ![Nmap](imagenes/forest1.png) ![Escaneo](imagenes/forest2.png)
 ![Filtro](imagenes/forest3.png)
 
@@ -21,7 +21,7 @@ Una vez con el hash obtenido, procedí a realizar un ataque de fuerza bruta offl
 svc-alfresco >> s3rvice
 ```
 
-2.   Explotación, una vez tuve las credenciales del usuario **svc-alfresco**,  procedí a validar el acceso al sistema mediante el protocolo **WinRM (Windows Remote Management)**,  Utilicé la herramienta **Evil-WinRM** para establecer una sesión interactiva de PowerShell
+2. Explotación, una vez tuve las credenciales del usuario **svc-alfresco**,  procedí a validar el acceso al sistema mediante el protocolo **WinRM (Windows Remote Management)**,  Utilicé la herramienta **Evil-WinRM** para establecer una sesión interactiva de PowerShell
 ![g](imagenes/forest9.png)
 ![f](imagenes/forest10.png)
 ![o](imagenes/forest11.png)
