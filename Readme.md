@@ -1,6 +1,6 @@
 #windows #ldap #easy 
 
-1.   Reconocimiento, hacemos un escaneo con nmap, que nos devuelve cantidad de puertos que no nos siren, asique filtraremos con grep buscando los puertos mas probables  para no perder el tiempo.
+1.   Reconocimiento, hice un escaneo con nmap, que me devuelvió cantidad de puertos que no nos pueden servir, filtre con grep buscando los puertos mas comunes para no perder el tiempo.
 ![Nmap](imagenes/forest1.png) ![Escaneo](imagenes/forest2.png)
 ![Filtro](imagenes/forest3.png)
 
