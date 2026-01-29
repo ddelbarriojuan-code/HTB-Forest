@@ -9,7 +9,7 @@ Con la herramienta [[enum4linux]] intenté, extraer el máximo número de datos,
 
 Después procedí a enumerar  los usuarios del dominio.
 ![Usuarios](imagenes/forest6.png)
-Una vez que los usuarios hubieran sido enumerados, procedí a seleccionar los validos y almacenarlos en el archivo users.txt, mas adelante usé ese  archivo para para realizar un ataque de [[AS-REP Roasting]] contra la lista de usuarios recuperada (`users.txt`), buscando cuentas que no requieran preautenticación de Kerberos con el script `GetNPUsers.py` de Impacket.
+Una vez que los usuarios hubieran sido enumerados, procedí a seleccionar los validos y almacenarlos en el archivo users.txt, mas adelante usé ese  archivo para para realizar un ataque de *AS-REP Roasting* contra la lista de usuarios recuperada (`users.txt`), buscando cuentas que no requieran preautenticación de Kerberos con el script `GetNPUsers.py` de Impacket.
 ![AS-REP Roasting](imagenes/forest7.png)
 Una vez con el hash obtenido, procedí a realizar un ataque de fuerza bruta offline utilizando **Hashcat**. Al tratarse de un hash de tipo **Kerberos 5 (etype 23)**, el proceso de crackeo fue exitoso
 
