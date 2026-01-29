@@ -2,31 +2,31 @@
 
 1.   Reconocimiento, hacemos un escaneo con nmap, que nos devuelve cantidad de puertos que no nos siren, asique filtraremos con grep buscando los puertos mas probables  para no perder el tiempo.
 ![Nmap](imagenes/forest1.png) ![Escaneo](imagenes/forest2.png)
-![[forest3.png]]
+![Filtro](imagenes/forest3.png)
 Con la herramienta [[enum4linux]] intenté, extraer el máximo número de datos, identifiqué el servicio **LDAPS** expuesto, permitiendo una enumeración de objetos del directorio mediante sesiones no autenticadas y el servicio **RDP (Remote Desktop Protocol)** activo, lo que representa el vector de acceso final para obtener una sesión interactiva una vez se comprometan credenciales válidas.
-![[forest4.png]]
-![[forest5.png]]
+![Enum4linux](imagenes/forest4.png)
+![RDP](imagenes/forest5.png)
 
 Después procedí a enumerar  los usuarios del dominio.
-![[forest6.png]]
+![Usuarios](imagenes/forest6.png)
 Una vez que los usuarios hubieran sido enumerados, procedí a seleccionar los validos y almacenarlos en el archivo users.txt, mas adelante usé ese  archivo para para realizar un ataque de [[AS-REP Roasting]] contra la lista de usuarios recuperada (`users.txt`), buscando cuentas que no requieran preautenticación de Kerberos con el script `GetNPUsers.py` de Impacket.
-![[forest7.png]]
+![AS-REP Roasting](imagenes/forest7.png)
 Una vez con el hash obtenido, procedí a realizar un ataque de fuerza bruta offline utilizando **Hashcat**. Al tratarse de un hash de tipo **Kerberos 5 (etype 23)**, el proceso de crackeo fue exitoso
 
-![[forest8.png]]
+![Crackeo](imagenes/forest8.png)
 ``` 
 svc-alfresco >> s3rvice
 ```
 
 2.   Explotación, una vez tuve las credenciales del usuario **svc-alfresco**,  procedí a validar el acceso al sistema mediante el protocolo **WinRM (Windows Remote Management)**,  Utilicé la herramienta **Evil-WinRM** para establecer una sesión interactiva de PowerShell
-![[forest9.png]]
-![[forest10.png]]
-![[forest11.png]]
+![g](imagenes/forest9.png)
+![f](imagenes/forest10.png)
+![o](imagenes/forest11.png)
 	1. Escalada a administrador, enumeré los permisos y los grupos en a los que pertenecía el usuario *svc-alfresco*, vi que pertenece al grupo *Acount Operator* por lo que tiene la capacidad de crear o modificar usuarios no protegidos,
 	
 Mediante consultas LDAP/PowerShell, se identificó la existencia del grupo **Exchange Windows Permissions**. Es un vector conocido que, en instalaciones de Exchange, este grupo posee derechos de **WriteDACL** sobre el objeto raíz del dominio.
 
-![[forest12.png]]
+![Permisos Exchange](imagenes/forest12.png)
 	 Por lo que pode  crear un usuario nuevo y añadirle al grupo *Exchange Windows Permissions* para heredar los derechos de [[WriteDACL]] (Poder de modificar los niveles de privilegios de los usuarios no protegidos),  de esa manera nos podremos otorgar privilegios de replicación de contraseñas (**DCSync**), también se le añadió al grupo *Remote Management Users* para que se pudiera conseguir la Shell a través de [[evilwinrm]]
 
 ```PowerShell 
@@ -61,8 +61,7 @@ Set-Acl "AD:\DC=htb,DC=local" $Dominio
 
 Una vez tuve mi usuario totalmente preparado me aproveché  de  los  privilegios de replicación de contraseñas que anteriormente me otorgue, utilice *impacket-secretsdump* para realizar un ataque DCSync desde mi maquina atacante obteniendo todos los *hashes NTLM* de todos los usuarios, incluido el de el administrador.
 
-![[forest13.png]]
-
+![P](imagenes/forest13.png)
 Por ultimo me conecte al usuario *Administrator* con *evilwinrm* usando el hash NTLM, y obtuve la flag de root. 
-![[forest14.png]]
-![[forest15.png]]
+![P](imagenes/forest14.png)
+![P](imagenes/forest15.png)
