@@ -1,6 +1,6 @@
 #windows #ldap #easy 
 
-1. Reconocimiento, hice un escaneo con nmap, que me devuelvió cantidad de puertos que no nos pueden servir, filtré con grep buscando los puertos mas comunes para no perder el tiempo.
+1. Reconocimiento, hice un escaneo con nmap, que me devolvió un numero bastante extenso  de puertos que de momento puede q no nos sirvan asique empece, grep buscando los puertos mas comunes de la salida del escaneo para no perder el tiempo.
 ![Nmap](imagenes/forest1.png) ![Escaneo](imagenes/forest2.png)
 ![Filtro](imagenes/forest3.png)
 
