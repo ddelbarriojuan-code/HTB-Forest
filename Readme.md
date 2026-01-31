@@ -1,10 +1,10 @@
 #windows #ldap #easy 
 
-1. Reconocimiento, hice un escaneo con nmap, que me devolvió un número bastante extenso  de puertos que de momento puede q no nos sirvan así queempece, grep buscando los puertos más comunes de la salida del escaneo para no perder el tiempo.
+1. Reconocimiento, hice un escaneo con nmap, que me devolvió un número bastante extenso  de puertos que de momento puede q no nos sirvan así que utilicé grep para buscar los puertos más comunes de la salida del escaneo para no perder el tiempo.
 ![Nmap](imagenes/forest1.png) ![Escaneo](imagenes/forest2.png)
 ![Filtro](imagenes/forest3.png)
 
-Con la herramienta [[enum4linux]] intenté, extraer el máximo número de datos, identifiqué el servicio **LDAPS** expuesto, permitiendo una enumeración de objetos del directorio mediante sesiones no autenticadas y el servicio **RDP (Remote Desktop Protocol)** activo, lo que representa el vector de acceso final para obtener una sesión interactiva una vez se comprometan credenciales válidas.
+Con la herramienta enum4linux intenté extraer el máximo número de datos, identifiqué el servicio **LDAPS** expuesto, permitiendo una enumeración de objetos del directorio mediante sesiones no autenticadas y el servicio **RDP (Remote Desktop Protocol)** activo, lo que representa el vector de acceso final para obtener una sesión interactiva una vez se comprometan credenciales válidas.
 ![Enum4linux](imagenes/forest4.png)
 ![RDP](imagenes/forest5.png)
 
@@ -26,13 +26,13 @@ svc-alfresco >> s3rvice
 ![f](imagenes/forest10.png)
 ![o](imagenes/forest11.png)
 
-3. Escalada a administrador, enumeré los permisos y los grupos en a los que pertenecía el usuario *svc-alfresco*, vi que pertenece al grupo *Acount 		Operator* por lo que tiene la capacidad de crear o modificar usuarios no protegidos,
+3. Escalada a administrador, enumeré los permisos y los grupos en a los que pertenecía el usuario *svc-alfresco*, vi que pertenece al grupo *Acount Operator* por lo que tiene la capacidad de crear o modificar usuarios no protegidos,
 	
 Mediante consultas LDAP/PowerShell, se identificó la existencia del grupo **Exchange Windows Permissions**. Es un vector conocido que, en instalaciones de Exchange, este grupo posee derechos de **WriteDACL** sobre el objeto raíz del dominio.
 
 ![Permisos Exchange](imagenes/forest12.png)
 
-	 Por lo que pude  crear un usuario nuevo y añadirle al grupo *Exchange Windows Permissions* para heredar los derechos de [[WriteDACL]] (puder de modificar los niveles de privilegios de los usuarios no protegidos),  de esa manera nos podremos otorgar privilegios de replicación de contraseñas (**DCSync**), también se le añadió al grupo *Remote Management Users* para que se pudiera conseguir la Shell a través de [[evilwinrm]]
+	 Por lo que pude  crear un usuario nuevo y añadirle al grupo *Exchange Windows Permissions* para heredar los derechos de WriteDACL (poder de modificar los niveles de privilegios de los usuarios no protegidos),  de esa manera nos podremos otorgar privilegios de replicación de contraseñas (**DCSync**), también se le añadió al grupo *Remote Management Users* para que se pudiera conseguir la Shell a través de evilwinrm
 
 ```PowerShell 
 net user usuario_prueba Hol@1234 /add /domain
