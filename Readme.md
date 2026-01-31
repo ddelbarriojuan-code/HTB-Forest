@@ -63,7 +63,7 @@ $Dominio.AddAccessRule($Regla2)
 Set-Acl "AD:\DC=htb,DC=local" $Dominio
 ```
 
-Una vez tuve mi usuario totalmente preparado me aproveché  de  los  privilegios de replicación de contraseñas que anteriormente me otorgué, utilicé *impacket-secretsdump* para realizar un ataque DCSync desde mi máqueuina atacante obteniendo todos los *hashes NTLM* de todos los usuarios, incluido el del administrador.
+Una vez tuve mi usuario totalmente preparado me uaproveché  de  los  privilegios de replicación de contraseñas que anteriormente me otorgué, utilicé *impacket-secretsdump* para realizar un ataque DCSync desde mi máqueuina atacante obteniendo todos los *hashes NTLM* de todos los usuarios, incluido el del administrador.
 
 ![P](imagenes/forest13.png)
 Por último me conecté al usuario *Administrator* con *evilwinrm* usando el hash NTLM, y obtuve la flag de root. 
