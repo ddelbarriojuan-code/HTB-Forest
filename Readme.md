@@ -14,7 +14,7 @@ Después procedí a enumerar  los usuarios del dominio.
 
 Una vez que los usuarios hubieran sido enumerados, procedí a seleccionar los válidos y almacenarlos en el archivo users.txt, más adelante usé ese  archivo para realizar un ataque de *AS-REP Roasting* contra la lista de usuarios recuperada (`users.txt`), buscando cuentas que no requeuieran preautenticación de Kerberos con el script `GetNPUsers.py` de Impacket.
 
-![AS-REP Roasting.](imagenes/forest7.png)
+![AS-REP-Roasting](imagenes/forest7.png)
 
 Una vez con el hash obtenido, procedí a realizar un ataque de fuerza bruta offline utilizando **Hashcat**. Al tratarse de un hash de tipo **Kerberos 5 (etype 23)**, el proceso de crackeo fue exitoso
 
