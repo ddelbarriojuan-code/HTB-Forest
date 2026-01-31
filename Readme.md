@@ -5,6 +5,7 @@
 ![Filtro](imagenes/forest3.png)
 
 Con la herramienta enum4linux intenté extraer el máximo número de datos, identifique el servicio **LDAPS** expuesto, permitiendo una enumeración de objetos del directorio mediante sesiones no autenticadas y el servicio **RDP (Remote Desktop Protocol)** activo, lo que representa el vector de acceso final para obtener una sesión interactiva una vez se comprometan credenciales válidas.
+
 ![Enum4linux](imagenes/forest4.png)
 ![RDP](imagenes/forest5.png)
 
